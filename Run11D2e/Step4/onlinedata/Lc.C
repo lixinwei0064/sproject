@@ -42,7 +42,7 @@ TLorentzVector decay_kinematics(TLorentzVector D0p,TH1D *formfactor){
   return leptonp3;
 }
 
-void Lc(const int seed = 32553, const int nEvents = 100000){
+void Lc(const int seed = 32553, const int nEvents = 10000000){
 
   TRandom *myRandom = new TRandom(seed);
 
