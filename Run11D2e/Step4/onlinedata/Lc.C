@@ -42,7 +42,7 @@ TLorentzVector decay_kinematics(TLorentzVector D0p,TH1D *formfactor){
   return leptonp3;
 }
 
-void Lc(const int seed = 32553, const int nEvents = 1000000){
+void Lc(const int seed = 32553, const int nEvents = 100000){
 
   TRandom *myRandom = new TRandom(seed);
 
@@ -71,7 +71,6 @@ void Lc(const int seed = 32553, const int nEvents = 1000000){
     
     ptRandom = myRandom->Uniform(0,6);
     v2 = v2funBaryon->Eval(ptRandom);
-    v2 /= 100;
     if(v2 < 0) v2 = 0;
     f2->SetParameter(0,v2);
     phiRandom = f2->GetRandom(0.,6.283);
@@ -89,7 +88,7 @@ void Lc(const int seed = 32553, const int nEvents = 1000000){
       phie->Fill(phiRandom,leptonp.Perp());
   }
 
-  TFile *phifile = new TFile(Form("output/e_Lc_1224_1.root"),"RECREATE");
+  TFile *phifile = new TFile(Form("output/e_Lc_1226.root"),"RECREATE");
   phiLc->Write();
   phie->Write();
 
@@ -102,10 +101,10 @@ void Lc(const int seed = 32553, const int nEvents = 1000000){
     v2D->SetBinContent(i,func->GetParameter(0));
     v2D->SetBinError(i,func->GetParError(0));
   }
-  v2D->GetYaxis()->SetRangeUser(-0.2,0.2);
+  //v2D->GetYaxis()->SetRangeUser(-0.2,0.2);
   v2D->Draw("E");
   v2D->Write();
   phifile->Close();
-  gPad->SaveAs("v2_vs_pT_e_Lc_1224.png");
+  gPad->SaveAs("v2_vs_pT_e_Lc_1226.png");
 }
 
